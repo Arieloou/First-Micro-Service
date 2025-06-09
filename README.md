@@ -1,17 +1,9 @@
 # First-Micro-Service
 By Ariel Anchapaxi
 
-¡Por supuesto! Un buen README.md es la tarjeta de presentación de tu proyecto. Debe ser claro, conciso y guiar a cualquier persona (incluido tu profesor) a través de tu trabajo, explicando no solo qué hace, sino también cómo y por qué lo hace de esa manera.
-
-Aquí tienes una plantilla completa y profesional que puedes adaptar. Está escrita en Markdown y diseñada para destacar los puntos clave de tu tarea.
-
-Plantilla para README.md
-
-Copia y pega este contenido en un archivo llamado README.md en la raíz de tu proyecto y rellena los detalles.
-
 # Microservicio de Notificaciones
 
-Este proyecto es un microservicio desarrollado como parte de la tarea universitaria para [Nombre de la Asignatura]. Su principal objetivo es demostrar la implementación de una arquitectura de microservicios robusta, aplicando buenas prácticas de diseño de software y los pilares fundamentales de este estilo arquitectónico.
+Este proyecto es un microservicio desarrollado como parte de la tarea universitaria para Diseño y Arquitectura de Software. Su principal objetivo es demostrar la implementación de una arquitectura de microservicios robusta, aplicando buenas prácticas de diseño de software y los pilares fundamentales de este estilo arquitectónico.
 
 ## 1. Dominio Funcional
 
@@ -23,7 +15,7 @@ El microservicio se enfoca en un único dominio: **la gestión y envío de notif
 
 El proyecto sigue los principios de la **Arquitectura Limpia (Clean Architecture)**, separando las responsabilidades en capas bien definidas para lograr un bajo acoplamiento y alta cohesión.
 
-*   **`Domain`**: El núcleo de la aplicación. Contiene las entidades de negocio (`Notification`, `NotificationLog`) con su lógica y reglas intrínsecas. No depende de ninguna otra capa.
+*   **`AppDomain`**: El núcleo de la aplicación. Contiene las entidades de negocio (`Notification`, `NotificationLog`) con su lógica y reglas intrínsecas. No depende de ninguna otra capa.
 *   **`Application`**: Orquesta los casos de uso. Contiene los servicios de aplicación (`NotificationAppService`) que utilizan las entidades del dominio para ejecutar las operaciones. Depende de `Domain`.
 *   **`Infrastructure`**: Contiene los detalles externos y la implementación de las interfaces definidas en capas superiores. Aquí se encuentran la configuración del `DbContext` (Entity Framework), los repositorios y los proveedores de notificaciones externas (ej. `EmailProvider`). Depende de `Application`.
 *   **`Presentation`**: El punto de entrada a la aplicación. En este caso, es la API REST (`NotificationsController`) que expone los endpoints al mundo exterior. Depende de `Application`.
@@ -68,51 +60,19 @@ El proyecto sigue los principios de la **Arquitectura Limpia (Clean Architecture
 
 Para el desarrollo local, el proyecto utiliza el **Secret Manager** de .NET para manejar las claves de API.
 
-1.  Abre una terminal en la carpeta raíz del proyecto (`/NotificationsService`).
-2.  Inicializa el Secret Manager:
-    ```bash
-    dotnet user-secrets init
-    ```
-3.  Añade las claves de API (puedes usar valores de prueba):
-    ```bash
-    dotnet user-secrets set "NotificationProviders:EmailApiKey" "TU_EMAIL_API_KEY_AQUI"
-    dotnet user-secrets set "NotificationProviders:SmsApiKey" "TU_SMS_API_KEY_AQUI"
-    ```
-
 ### Ejecución Local (Usando la CLI de .NET)
 
 1.  **Restaurar dependencias:**
     ```bash
     dotnet restore
     ```
-2.  **Aplicar las migraciones a la base de datos:**
-    El proyecto está configurado para aplicar las migraciones automáticamente al iniciar en modo de desarrollo. Si prefieres hacerlo manualmente, ejecuta:
-    ```bash
-    dotnet ef database update
-    ```
-3.  **Iniciar la aplicación:**
+2.  **Iniciar la aplicación:**
     ```bash
     dotnet run
     ```
-4.  La API estará disponible en `https://localhost:XXXX` y `http://localhost:YYYY`. Puedes acceder a la documentación interactiva de Swagger en `https://localhost:XXXX/swagger`.
+3.  La API estará disponible en `https://localhost:XXXX` y `http://localhost:YYYY`.
 
-### Ejecución con Docker
-
-1.  **Construir la imagen de Docker:**
-    ```bash
-    docker build -t notification-service .
-    ```
-2.  **Ejecutar el contenedor:**
-    Pasa las claves de API como variables de entorno al contenedor.
-    ```bash
-    docker run -p 8080:8080 -e "NotificationProviders:EmailApiKey=TU_EMAIL_API_KEY_AQUI" -e "NotificationProviders:SmsApiKey=TU_SMS_API_KEY_AQUI" -e "ASPNETCORE_URLS=http://+:8080" notification-service
-    ```
-    *   `-p 8080:8080` mapea el puerto 8080 de tu máquina al puerto 8080 del contenedor.
-    *   `-e` establece las variables de entorno necesarias.
-
----
-
-## 6. API Endpoint
+## 5. API Endpoint
 
 ### Enviar una Notificación
 
@@ -146,8 +106,5 @@ Para el desarrollo local, el proyecto utiliza el **Secret Manager** de .NET para
     ```
 
 ---
-**Autor**: [Tu Nombre]
-**Fecha**: [Fecha de Entrega]
 
-
-Este README no solo cumple con los requisitos, sino que también sirve como una excelente pieza de documentación que demuestra tu profundo entendimiento de los conceptos aplicados. ¡Mucha suerte con tu entrega
+**Fecha**: 11/06/2025
