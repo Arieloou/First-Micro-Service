@@ -1,1 +1,42 @@
-﻿
+﻿version: '3.8'
+
+services:
+  notification-api:
+    build: .
+    image: notification-service:latest
+    container_name: notification_service_container
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1443;Database=Notifications;User=sa;Password=${SA_PASSWORD};
+      - NotificationProviders__EmailApiKey=${EMAIL_API_KEY}
+      - NotificationProviders__SmsApiKey=${SMS_API_KEY}
+
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+      - MSSQL_PID=Express
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      # El comando que se ejecuta para comprobar la salud
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "SELECT 1"]
+      interval: 10s   # Comprueba cada 10 segundos
+      timeout: 3s     # Si la comprobación tarda más de 3 segundos, falla
+      retries: 10     # Intenta 10 veces antes de marcar el contenedor como "unhealthy"
+      start_period: 10s # Periodo de gracia al inicio antes de empezar a comprobar
+
+volumes:
+  sqlserver_data:

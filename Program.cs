@@ -48,6 +48,24 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // Código Generado por Google AiStudio
+    Thread.Sleep(5000); // 5 segundos de gracia adicionales
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
+        try
+        {
+            // Aplica cualquier migración pendiente para crear la BD y las tablas
+            dbContext.Database.Migrate();
+            Console.WriteLine("Migración de la base de datos completada exitosamente.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ocurrió un error durante la migración de la base de datos: {ex.Message}");
+        }
+    }
 }
 
 app.UseHttpsRedirection();
