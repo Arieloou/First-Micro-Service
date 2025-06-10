@@ -7,7 +7,7 @@ Este proyecto es un microservicio desarrollado como parte de la tarea universita
 
 ## 1. Dominio Funcional
 
-El microservicio se enfoca en un único dominio: **la gestión y envío de notificaciones**. Su responsabilidad exclusiva es recibir solicitudes para enviar notificaciones a través de diferentes canales (como email o SMS), procesarlas y registrar el resultado, sin conocer el contexto de negocio que origina la solicitud (ej. confirmación de compra, reseteo de contraseña, etc.).
+El microservicio se enfoca en un único dominio: **la gestión y envío de notificaciones**. Su responsabilidad exclusiva es recibir solicitudes para enviar notificaciones a través de diferentes canales (como email o SMS, **todo es de forma simulada**), procesarlas y registrar el resultado, sin conocer el contexto de negocio que origina la solicitud (ej. confirmación de compra, reseteo de contraseña, etc.).
 
 ---
 
