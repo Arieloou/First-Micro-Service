@@ -30,7 +30,7 @@ builder.Services.AddTransient<Func<string, INotificationProvider>>
         {
             case "email":
                 return serviceProvider.GetRequiredService<EmailProvider>();
-            case "SMS":
+            case "sms":
                 return serviceProvider.GetRequiredService<SMSProvider>();
             default:
                 throw new NotSupportedException($"El proveedor '{key}' no está soportado.");
