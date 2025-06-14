@@ -11,7 +11,7 @@ services:
 
     environment:
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1443;Database=Notifications;User=sa;Password=${SA_PASSWORD};
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1443;Database=${DATABASE};User=${USER};Password=${SA_PASSWORD};
       - NotificationProviders__EmailApiKey=${EMAIL_API_KEY}
       - NotificationProviders__SmsApiKey=${SMS_API_KEY}
 

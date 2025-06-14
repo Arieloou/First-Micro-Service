@@ -9,7 +9,7 @@ using NotificationsService.Infraestructure.Persistence.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDBContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationConnection")));
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Registra el servicio de Aplicación Principal
 builder.Services.AddScoped<NotificationAppService>();
